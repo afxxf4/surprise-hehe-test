@@ -1,0 +1,285 @@
+<!-- Start of HTML -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>something something</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5e6da;
+      font-family: "Papyrus", cursive;
+      overflow: hidden;
+    }
+
+    .fade-text {
+      font-size: 2rem;
+      color: #5c2c1d;
+      opacity: 0;
+      transition: opacity 1s;
+      text-align: center;
+    }
+
+    .blink {
+      font-size: 1rem;
+      margin-top: 10px;
+      animation: blink 1s infinite alternate;
+    }
+
+    @keyframes blink {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    .cake {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 120px;
+      background: #8b4513;
+      border-radius: 10px;
+      display: none;
+      transition: opacity 1s;
+    }
+
+    .cake::before {
+      content: "";
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      height: 30px;
+      background: #d2691e;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .candle {
+      position: absolute;
+      width: 10px;
+      height: 40px;
+      background: #fffacd;
+      top: -40px;
+      border-radius: 2px;
+    }
+
+    .candle:nth-child(1) { left: 20px; }
+    .candle:nth-child(2) { left: 60px; }
+    .candle:nth-child(3) { left: 100px; }
+    .candle:nth-child(4) { left: 140px; }
+    .candle:nth-child(5) { left: 180px; }
+
+    .candle .flame {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 20px;
+      background: radial-gradient(circle, gold 40%, orange 70%, transparent 100%);
+      border-radius: 50%;
+      animation: flicker 0.3s infinite alternate;
+    }
+
+    /* Flame flicker delays */
+    .candle:nth-child(1) .flame { animation-delay: 0s; }
+    .candle:nth-child(2) .flame { animation-delay: 0.1s; }
+    .candle:nth-child(3) .flame { animation-delay: 0.2s; }
+    .candle:nth-child(4) .flame { animation-delay: 0.15s; }
+    .candle:nth-child(5) .flame { animation-delay: 0.05s; }
+
+    @keyframes flicker {
+      from { transform: translateX(-50%) scale(1); }
+      to { transform: translateX(-50%) scale(1.2); }
+    }
+
+    .cake-text {
+      position: absolute;
+      top: 110%;
+      width: 100%;
+      text-align: center;
+      font-size: 1rem;
+      margin-top: 10px;
+      color: #5c2c1d;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 60px;
+      height: 60px;
+      background: red;
+      transform: rotate(-45deg);
+      animation: floatUp 6s linear forwards;
+    }
+
+    .balloon::before,
+    .balloon::after {
+      content: "";
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    .balloon::before { top: -30px; left: 0; }
+    .balloon::after { left: 30px; top: 0; }
+
+    @keyframes floatUp {
+      from { transform: translateY(0) rotate(-45deg); opacity: 1; }
+      to { transform: translateY(-120vh) rotate(-45deg); opacity: 0; }
+    }
+
+    #goodBoyBtn {
+      display: none;
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s;
+    }
+
+    #goodBoyBtn:hover {
+      background: #e63950;
+    }
+
+    #note {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff0f5;
+      padding: 20px 30px;
+      border-radius: 15px;
+      font-size: 1.5rem;
+      color: #5c2c1d;
+      opacity: 0;
+      transition: opacity 1s;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    #note.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="scene1" class="fade-text">
+    Happy Birthday my kuchikuchikuuu &lt;3
+    <div class="blink">tap on the screen</div>
+  </div>
+
+  <div id="scene2" class="fade-text">
+    Here is a cake for all the years you haven’t had your own cake :33
+  </div>
+
+  <div id="cakeScene" class="cake" title="Chocolate Cake with Caramel Frosting!" aria-label="Birthday Cake">
+    <div class="candle"><div class="flame"></div></div>
+    <div class="candle"><div class="flame"></div></div>
+    <div class="candle"><div class="flame"></div></div>
+    <div class="candle"><div class="flame"></div></div>
+    <div class="candle"><div class="flame"></div></div>
+    <div class="cake-text">(tap to blow the candles)</div>
+  </div>
+
+  <button id="goodBoyBtn" aria-label="Surprise Me Button">Surprise me c;</button>
+
+  <div id="note" aria-label="Birthday Note">
+    Happyyyy birthdayyyy to my mannn&lt;333 mwahhhmwahhhmwahhhmwahhhmwahhmwahmwahmwahhhmwahmwahmwahmwahmwahhmwahhhmwahhhmwahhhmwahhhmwahmwahhhh oldiee hehe to another 19 years with you and more my kuchikuchikuu &lt;33 thenkyouuu for stayinggg even despite everything maa ill make sure you wont regret :33
+  </div>
+
+  <div id="ytplayer" style="display:none;"></div>
+
+  <script>
+    let tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
+
+    let player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('ytplayer', {
+        height: '0',
+        width: '0',
+        videoId: 'VjipUXcbGKA',
+        playerVars: {
+          autoplay: 0,
+          loop: 1,
+          playlist: 'VjipUXcbGKA'
+        }
+      });
+    }
+
+    let step = 0;
+    const scene1 = document.getElementById("scene1");
+    const scene2 = document.getElementById("scene2");
+    const cakeScene = document.getElementById("cakeScene");
+    const goodBoyBtn = document.getElementById("goodBoyBtn");
+    const note = document.getElementById("note");
+
+    scene1.style.opacity = 1;
+
+    document.body.addEventListener("click", handleTap);
+    document.body.addEventListener("touchstart", handleTap);
+
+    function handleTap() {
+      step++;
+
+      if (step === 1) {
+        scene1.style.opacity = 0;
+        setTimeout(() => scene2.style.opacity = 1, 1000);
+      } else if (step === 2) {
+        scene2.style.opacity = 0;
+        setTimeout(() => cakeScene.style.display = "block", 1000);
+      } else if (step === 3) {
+        const flames = document.querySelectorAll(".flame");
+        flames.forEach(f => {
+          f.style.animation = "blowOut 1.5s forwards";
+        });
+        const styleEl = document.createElement("style");
+        styleEl.textContent = `@keyframes blowOut { to { transform:translateX(-50%) scale(0); opacity:0; } }`;
+        document.head.appendChild(styleEl);
+        setTimeout(() => spawnBalloons(15), 1500);
+        setTimeout(() => goodBoyBtn.style.display = "block", 3000);
+      }
+    }
+
+    goodBoyBtn.addEventListener("click", () => {
+      cakeScene.style.display = "none";
+      note.classList.add("show");
+
+      if (player && player.playVideo) {
+        player.playVideo();
+      }
+    });
+
+    function spawnBalloons(count) {
+      const colors = ["#ff4d6d", "#ff7f7f", "#e75480", "#ff9999", "#cc3366"];
+      for (let i = 0; i < count; i++) {
+        let b = document.createElement("div");
+        b.className = "balloon";
+        b.style.left = Math.random() * 90 + "vw";
+        b.style.background = colors[Math.floor(Math.random() * colors.length)];
+        b.style.animationDuration = (4 + Math.random() * 2) + "s";
+        document.body.appendChild(b);
+        setTimeout(() => b.remove(), 6000);
+      }
+    }
+  </script>
+</body>
+</html>
