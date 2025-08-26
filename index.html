@@ -44,8 +44,12 @@
       height: 120px;
       background: #8b4513;
       border-radius: 10px;
-      display: none;
+      opacity: 0;
       transition: opacity 1s;
+    }
+
+    .cake.show {
+      opacity: 1;
     }
 
     .cake::before {
@@ -175,23 +179,6 @@
     #note.show {
       opacity: 1;
     }
-
-    .heart {
-      position: absolute;
-      animation: floatHeart 4s ease-in-out;
-      pointer-events: none;
-    }
-
-    @keyframes floatHeart {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-50vh) scale(1.5);
-        opacity: 0;
-      }
-    }
   </style>
 </head>
 <body>
@@ -260,7 +247,7 @@
         setTimeout(() => scene2.style.opacity = 1, 1000);
       } else if (step === 2) {
         scene2.style.opacity = 0;
-        setTimeout(() => cakeScene.style.display = "block", 1000);
+        setTimeout(() => cakeScene.classList.add("show"), 1000);
       } else if (step === 3) {
         const flames = document.querySelectorAll(".flame");
         flames.forEach(f => {
@@ -280,7 +267,6 @@
         note.classList.add("show");
         goodBoyBtn.textContent = "surprise mee :p";
         noteShown = true;
-        spawnHearts(200);
       } else {
         if (player && player.playVideo) {
           player.playVideo();
@@ -299,21 +285,6 @@
         document.body.appendChild(b);
         setTimeout(() => b.remove(), 6000);
       }
-    }
-
-    function spawnHearts(count) {
-      for (let i = 0; i < count; i++) {
-        let heart = document.createElement("div");
-        heart.className = "heart";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.top = Math.random() * 100 + "vh";
-        heart.style.fontSize = (Math.random() * 20 + 10) + "px";
-        heart.textContent = "❤️";
-        document.body.appendChild(heart);
-      }
-      setTimeout(() => {
-        document.querySelectorAll(".heart").forEach(h => h.remove());
-      }, 4000);
     }
   </script>
 </body>
