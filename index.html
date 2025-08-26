@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>something something</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Surprise</title>
   <style>
     body {
       margin: 0;
@@ -11,294 +11,90 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #f5e6da;
-      font-family: "Papyrus", cursive;
+      background-color: #fef6e4;
       overflow: hidden;
+      font-family: Arial, sans-serif;
     }
-
-    .fade-text {
-      font-size: 2rem;
-      color: #5c2c1d;
-      opacity: 0;
-      transition: opacity 1s;
+    .container {
       text-align: center;
     }
-
-    .blink {
-      font-size: 1rem;
-      margin-top: 10px;
-      animation: blink 1s infinite alternate;
-    }
-
-    @keyframes blink {
-      from { opacity: 1; }
-      to { opacity: 0; }
-    }
-
     .cake {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 200px;
-      height: 120px;
-      background: #8b4513;
-      border-radius: 10px;
+      font-size: 100px;
       opacity: 0;
-      transition: opacity 1s;
+      transition: opacity 2s ease;
     }
-
-    .cake.show {
-      opacity: 1;
-    }
-
-    .cake::before {
-      content: "";
-      position: absolute;
-      top: -25px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 220px;
-      height: 30px;
-      background: #d2691e;
-      border-radius: 10px 10px 0 0;
-    }
-
     .candle {
-      position: absolute;
-      width: 10px;
-      height: 40px;
-      background: #fffacd;
-      top: -40px;
-      border-radius: 2px;
+      color: gold;
+      animation: flicker 1s infinite alternate;
     }
-
-    .candle:nth-child(1) { left: 20px; }
-    .candle:nth-child(2) { left: 60px; }
-    .candle:nth-child(3) { left: 100px; }
-    .candle:nth-child(4) { left: 140px; }
-    .candle:nth-child(5) { left: 180px; }
-
-    .candle .flame {
-      position: absolute;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 12px;
-      height: 20px;
-      background: radial-gradient(circle, gold 40%, orange 70%, transparent 100%);
-      border-radius: 50%;
-      animation: flicker 0.3s infinite alternate;
-    }
-
-    .candle:nth-child(1) .flame { animation-delay: 0s; }
-    .candle:nth-child(2) .flame { animation-delay: 0.1s; }
-    .candle:nth-child(3) .flame { animation-delay: 0.2s; }
-    .candle:nth-child(4) .flame { animation-delay: 0.15s; }
-    .candle:nth-child(5) .flame { animation-delay: 0.05s; }
-
     @keyframes flicker {
-      from { transform: translateX(-50%) scale(1); }
-      to { transform: translateX(-50%) scale(1.2); }
+      from { opacity: 1; }
+      to { opacity: 0.5; }
     }
-
-    .cake-text {
-      position: absolute;
-      top: 110%;
-      width: 100%;
-      text-align: center;
-      font-size: 1rem;
-      margin-top: 10px;
-      color: #5c2c1d;
-    }
-
     .balloon {
       position: absolute;
       bottom: -150px;
-      width: 60px;
-      height: 60px;
-      background: red;
-      transform: rotate(-45deg);
-      animation: floatUp 6s linear forwards;
+      font-size: 50px;
+      animation: floatUp 6s ease-in forwards;
     }
-
-    .balloon::before,
-    .balloon::after {
-      content: "";
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      background: inherit;
-      border-radius: 50%;
-    }
-
-    .balloon::before { top: -30px; left: 0; }
-    .balloon::after { left: 30px; top: 0; }
-
     @keyframes floatUp {
-      from { transform: translateY(0) rotate(-45deg); opacity: 1; }
-      to { transform: translateY(-120vh) rotate(-45deg); opacity: 0; }
+      to { transform: translateY(-110vh); opacity: 0; }
     }
-
-    #goodBoyBtn {
+    .note {
       display: none;
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 12px 24px;
-      font-size: 1.1rem;
-      background: #ff4d6d;
-      color: white;
+      margin-top: 20px;
+      padding: 15px;
+      border: 2px solid #ff69b4;
+      background-color: #fff0f5;
+      border-radius: 10px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ffb6c1;
       border: none;
-      border-radius: 20px;
+      border-radius: 5px;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      transition: background 0.3s;
+      transition: background-color 0.3s;
     }
-
-    #goodBoyBtn:hover {
-      background: #e63950;
-    }
-
-    #note {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #fff0f5;
-      padding: 20px 30px;
-      border-radius: 15px;
-      font-size: 1.5rem;
-      color: #5c2c1d;
-      opacity: 0;
-      transition: opacity 1s;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-      font-family: "Rosalia", cursive;
-      white-space: pre-wrap;
-      overflow: hidden;
-      border-right: .15em solid #5c2c1d;
-    }
-
-    #note.show {
-      opacity: 1;
-      animation: typing 8s steps(60, end), blink-caret .75s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: #5c2c1d; }
+    button:hover {
+      background-color: #ff69b4;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <div id="scene1" class="fade-text">
-    Happy Birthday my kuchikuchikuuu &lt;3
-    <div class="blink">tap on the screen</div>
+  <div class="container">
+    <div id="cake" class="cake">🎂<span class="candle">🕯️</span></div>
+    <button onclick="showNote()">press here if u r a good boy c;</button>
+    <div id="note" class="note">
+      happy birthday my sweet boyyyy im sooo proud of who u r today maaa never ever ever change urselfff you are the best guy ive met in my entire life (pakka pinky wallahi im sure) mwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwah :33 nineteen kisses for my sweet 19 year old bbyyyy hehe- ou know itsss okkeeyyyyy u r olddd :p even if u are oldie, ill still love you the same, ill love you even if ur hair grows grey or even if ur teeth fall out okeyyy? (pinkyyyy) i love you soooooooo much maaaa and i want to be present for ur next 19 and hopefully 190 more birthdays if i could. maybe sometime ill get you an actual cake instead of smthg like this maaaaa :33 mwahhh have an amaaaazzziiinggggg day and year my bby boyyy <33
+    </div>
   </div>
-
-  <div id="scene2" class="fade-text">
-    Here is a cake for all the years you haven’t had your own cake :33
-  </div>
-
-  <div id="cakeScene" class="cake" title="Chocolate Cake with Caramel Frosting!" aria-label="Birthday Cake">
-    <div class="candle"><div class="flame"></div></div>
-    <div class="candle"><div class="flame"></div></div>
-    <div class="candle"><div class="flame"></div></div>
-    <div class="candle"><div class="flame"></div></div>
-    <div class="candle"><div class="flame"></div></div>
-    <div class="cake-text">(tap to blow the candles)</div>
-  </div>
-
-  <button id="goodBoyBtn" aria-label="Surprise Me Button">press here if u r a good boy c;</button>
-
-  <div id="note" aria-label="Birthday Note">
-    happy birthday my sweet boyyyy im sooo proud of who u r today maaa never ever ever change urselfff you are the best guy ive met in my entire life (pakka pinky wallahi im sure) mwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwahmwah :33 nineteen kisses for my sweet 19 year old bbyyyy hehe- ou know itsss okkeeyyyyy u r olddd :p even if u are oldie, ill still love you the same, ill love you even if ur hair grows grey or even if ur teeth fall out okeyyy? (pinkyyyy) i love you soooooooo much maaaa and i want to be present for ur next 19 and hopefully 190 more birthdays if i could. maybe sometime ill get you an actual cake instead of smthg like this maaaaa :33 mwahhh have an amaaaazzziiinggggg day and year my bby boyyy &lt;33
-  </div>
-
-  <div id="ytplayer" style="display:none;"></div>
 
   <script>
-    let tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.body.appendChild(tag);
+    function showNote() {
+      const cake = document.getElementById("cake");
+      cake.style.opacity = "1";
 
-    let player;
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('ytplayer', {
-        height: '0',
-        width: '0',
-        videoId: 'VjipUXcbGKA',
-        playerVars: {
-          autoplay: 0,
-          loop: 1,
-          playlist: 'VjipUXcbGKA'
-        }
-      });
-    }
+      const note = document.getElementById("note");
+      note.style.display = "block";
 
-    let step = 0;
-    let noteShown = false;
-    const scene1 = document.getElementById("scene1");
-    const scene2 = document.getElementById("scene2");
-    const cakeScene = document.getElementById("cakeScene");
-    const goodBoyBtn = document.getElementById("goodBoyBtn");
-    const note = document.getElementById("note");
-
-    scene1.style.opacity = 1;
-
-    document.body.addEventListener("click", handleTap);
-    document.body.addEventListener("touchstart", handleTap);
-
-    function handleTap() {
-      step++;
-      if (step === 1) {
-        scene1.style.opacity = 0;
-        setTimeout(() => scene2.style.opacity = 1, 1000);
-      } else if (step === 2) {
-        scene2.style.opacity = 0;
-        setTimeout(() => cakeScene.classList.add("show"), 1000);
-      } else if (step === 3) {
-        const flames = document.querySelectorAll(".flame");
-        flames.forEach(f => {
-          f.style.animation = "blowOut 1.5s forwards";
-        });
-        const styleEl = document.createElement("style");
-        styleEl.textContent = `@keyframes blowOut { to { transform:translateX(-50%) scale(0); opacity:0; } }`;
-        document.head.appendChild(styleEl);
-        setTimeout(() => spawnBalloons(15), 1500);
-        setTimeout(() => goodBoyBtn.style.display = "block", 3000);
-      }
-    }
-
-    goodBoyBtn.addEventListener("click", () => {
-      if (!noteShown) {
-        cakeScene.style.display = "none";
-        note.classList.add("show");
-        goodBoyBtn.textContent = "surprise mee :p";
-        noteShown = true;
-      } else {
-        if (player && player.playVideo) {
-          player.playVideo();
-        }
-      }
-    });
-
-    function spawnBalloons(count) {
-      const colors = ["#ff4d6d", "#ff7f7f", "#e75480", "#ff9999", "#cc3366"];
-      for (let i = 0; i < count; i++) {
-        let b = document.createElement("div");
-        b.className = "balloon";
-        b.style.left = Math.random() * 90 + "vw";
-        b.style.background = colors[Math.floor(Math.random() * colors.length)];
-        b.style.animationDuration = (4 + Math.random() * 2) + "s";
-        document.body.appendChild(b);
-        setTimeout(() => b.remove(), 6000);
+      // Balloons
+      for (let i = 0; i < 20; i++) {
+        const balloon = document.createElement("div");
+        balloon.classList.add("balloon");
+        balloon.textContent = "🎈";
+        balloon.style.left = Math.random() * 100 + "vw";
+        balloon.style.animationDuration = 4 + Math.random() * 3 + "s";
+        document.body.appendChild(balloon);
+        setTimeout(() => balloon.remove(), 7000);
       }
     }
   </script>
