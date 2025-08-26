@@ -1,4 +1,3 @@
-<!-- Start of HTML -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,7 +87,6 @@
       animation: flicker 0.3s infinite alternate;
     }
 
-    /* Flame flicker delays */
     .candle:nth-child(1) .flame { animation-delay: 0s; }
     .candle:nth-child(2) .flame { animation-delay: 0.1s; }
     .candle:nth-child(3) .flame { animation-delay: 0.2s; }
@@ -177,6 +175,23 @@
     #note.show {
       opacity: 1;
     }
+
+    .heart {
+      position: absolute;
+      animation: floatHeart 4s ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-50vh) scale(1.5);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -198,7 +213,7 @@
     <div class="cake-text">(tap to blow the candles)</div>
   </div>
 
-  <button id="goodBoyBtn" aria-label="Surprise Me Button">Surprise me c;</button>
+  <button id="goodBoyBtn" aria-label="Surprise Me Button">press here if u r a good boy c;</button>
 
   <div id="note" aria-label="Birthday Note">
     Happyyyy birthdayyyy to my mannn&lt;333 mwahhhmwahhhmwahhhmwahhhmwahhmwahmwahmwahhhmwahmwahmwahmwahmwahhmwahhhmwahhhmwahhhmwahhhmwahmwahhhh oldiee hehe to another 19 years with you and more my kuchikuchikuu &lt;33 thenkyouuu for stayinggg even despite everything maa ill make sure you wont regret :33
@@ -226,6 +241,7 @@
     }
 
     let step = 0;
+    let noteShown = false;
     const scene1 = document.getElementById("scene1");
     const scene2 = document.getElementById("scene2");
     const cakeScene = document.getElementById("cakeScene");
@@ -239,7 +255,6 @@
 
     function handleTap() {
       step++;
-
       if (step === 1) {
         scene1.style.opacity = 0;
         setTimeout(() => scene2.style.opacity = 1, 1000);
@@ -260,11 +275,16 @@
     }
 
     goodBoyBtn.addEventListener("click", () => {
-      cakeScene.style.display = "none";
-      note.classList.add("show");
-
-      if (player && player.playVideo) {
-        player.playVideo();
+      if (!noteShown) {
+        cakeScene.style.display = "none";
+        note.classList.add("show");
+        goodBoyBtn.textContent = "surprise mee :p";
+        noteShown = true;
+        spawnHearts(200);
+      } else {
+        if (player && player.playVideo) {
+          player.playVideo();
+        }
       }
     });
 
@@ -279,6 +299,21 @@
         document.body.appendChild(b);
         setTimeout(() => b.remove(), 6000);
       }
+    }
+
+    function spawnHearts(count) {
+      for (let i = 0; i < count; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = Math.random() * 100 + "vh";
+        heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+        heart.textContent = "❤️";
+        document.body.appendChild(heart);
+      }
+      setTimeout(() => {
+        document.querySelectorAll(".heart").forEach(h => h.remove());
+      }, 4000);
     }
   </script>
 </body>
